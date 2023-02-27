@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Alert, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import SignUpForm from "../components/SignUpForm";
+import { login, signup } from '../context/actions';
+import { useAuthDispatch } from '../context/context';
 
 const SignUp = (props) => {
     const [loading, setLoading] = useState(false);
@@ -36,3 +39,5 @@ const SignUp = (props) => {
         </Container>
     )
 };
+
+export default SignUp;
