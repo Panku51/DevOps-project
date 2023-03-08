@@ -18,4 +18,11 @@ const Post = ({post, isSinglePost, isReplyView, setShowingLikesModal, setShowing
         })
         .catch((err) => console.error(err))
     };
+        const repostPost = () => {
+        ApiService.toggleRepost(post.post_id, reposted)
+        .then((res) => {
+            if (res.data) setReposted(res.data.reposted);
+        })
+        .catch((err) => console.error(err));
+    };
 }
