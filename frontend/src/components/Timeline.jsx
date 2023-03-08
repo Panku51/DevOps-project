@@ -24,3 +24,36 @@ const Timeline = ({type, user, showNewPost}) => {
             .finally(() => setLoading(false))    
         }
     }, []);
+
+
+    const appendPost = (post) => setPosts([post, ...posts]);
+    const removePost = (deletingPostId) => setPosts(posts.filter((post) => post.post_id !== deletingPostId));
+    const appendReply = (reply) => {
+        let postsAux = posts;
+        postsAux.splice(postsAux.findIndex((post) => post.post_id === reply.reply_to)+1, 0, reply);
+        setPosts([...postsAux]);
+    }
+
+    return(
+        <>
+            <Row>
+                <Col>
+                    {showNewPost && <NewPost appendPost={appendPost}/>}
+                </Col>
+            </Row>
+            <Row className="mt-3">
+                <Col>
+                    {loading && 
+                        <div className="text-center">
+                            <Spinner animation="border" variant="primary"/>
+                        </div>}
+                    {error && <Alert show variant="danger">{error}</Alert>}
+                    {posts && !loading && !error && posts.length === 0 && <h6>No hay publicaciones</h6>}
+                    {posts && !loading && !error && posts.map((post) => <Post key={post.post_id} post={post} removePost={removePost} appendReply={appendReply}/>)}
+                </Col>
+            </Row>
+        </>
+    );
+};
+
+export default Timeline;
