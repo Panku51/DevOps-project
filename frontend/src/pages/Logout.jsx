@@ -9,3 +9,12 @@ const Logout = (props) => {
         logout(dispatch);      
         props.history.push('/');
     }, [dispatch, props.history]);
+    
+    return(
+        <div>
+            <p>Cerrando sesión...</p>
+        </div>
+    );
+};
+
+export default Logout;
