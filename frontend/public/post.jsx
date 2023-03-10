@@ -25,4 +25,15 @@ const Post = ({post, isSinglePost, isReplyView, setShowingLikesModal, setShowing
         })
         .catch((err) => console.error(err));
     };
+        const deletePost = () => {
+        if (!post.reply_to){
+            ApiService.deletePost(post.post_id)
+            .then((res) => {
+                if (res.success) {
+                    setShowingDeletePostModal(false);
+                    removePost(post.post_id);
+                }
+            }).catch((err) => console.error(err));   
+        } 
+    }
 }
