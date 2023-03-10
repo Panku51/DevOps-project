@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { logout } from '../context/actions';
 import { useAuthDispatch } from '../context/context';
 
+
 const Logout = (props) => {
     const dispatch = useAuthDispatch(); 
     useEffect(() => {
