@@ -39,8 +39,7 @@ const Login = (props) => {
                 </Col>
             </Row>
         </Container>
-    );
-                         
+    );                     
 };
 
 export default Login;
