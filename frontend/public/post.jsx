@@ -43,6 +43,9 @@ const Post = ({post, isSinglePost, isReplyView, setShowingLikesModal, setShowing
                 }
             }).catch((err) => console.error(err));  
         }
+    const handleClick = (ev) => window.location = `/post/${post.post_id}`;
+    const handleProfileImgClick = (ev) => window.location = `/${post.username}`;
     }
 
 }
+export default Post;
