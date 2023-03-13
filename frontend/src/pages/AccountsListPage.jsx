@@ -5,6 +5,7 @@ import AccountCard from "../components/AccountCard";
 import Navigation from "../components/Navigation";
 import { ApiService } from "../services/ApiService";
 
+// functionality 
 const AccountsListPage = () => {
     let path = useLocation().pathname;
     const [username] = useState(useParams().username);
