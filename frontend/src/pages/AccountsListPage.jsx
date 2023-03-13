@@ -5,6 +5,30 @@ import AccountCard from "../components/AccountCard";
 import Navigation from "../components/Navigation";
 import { ApiService } from "../services/ApiService";
 
+const AccountsListPage = () => {
+    let path = useLocation().pathname;
+    const [username] = useState(useParams().username);
+    const [mode] = useState(path.substring(path.lastIndexOf('/')+1) === 'following' ? 'following' : 'followers');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [accounts, setAccounts] = useState(null);
+    useEffect(() => {
+        if (mode === 'following'){
+            ApiService.getFollowing(username)
+            .then((res) => {
+                if (res.data) setAccounts(res.data);
+            }).catch(err => setError(err))
+            .finally(() => setLoading(false));
+        } else if (mode === 'followers') {
+            ApiService.getFollowers(username)
+            .then((res) => {
+                if (res.data) setAccounts(res.data);
+            }).catch(err => setError(err))
+            .finally(() => setLoading(false));
+        }
+    }, [username, mode]);
+
+    return(
         <Container fluid="xl">
             <Row>
                 <Col md={3} className="aside d-none d-md-block">
@@ -32,5 +56,7 @@ import { ApiService } from "../services/ApiService";
                 </Col>
             </Row>
         </Container>
+    );
+};
 
 export default AccountsListPage;
