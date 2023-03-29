@@ -7,3 +7,10 @@ const config = {
     database : process.env.DB_NAME,
     connectionLimit: process.env.DB_CONNECTION_LIMIT
 };
+logger.debug({config});
+
+const pool = mysql.createPool(config);
+
+pool.on('connection', (connection) => {
+    logger.debug({thread_id: connection.threadId}, 'New connection to database.');
+});
