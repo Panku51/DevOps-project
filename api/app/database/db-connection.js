@@ -14,3 +14,17 @@ const pool = mysql.createPool(config);
 pool.on('connection', (connection) => {
     logger.debug({thread_id: connection.threadId}, 'New connection to database.');
 });
+
+pool.on('acquire', (connection) => {
+    logger.debug({thread_id: connection.threadId}, 'Acquired connection');
+});
+
+pool.on('release', (connection) => {
+    logger.debug({thread_id: connection.threadId}, 'Connection to database released');
+});
+
+const doQuery = async (query, parameters, conn) => {
+    return (conn) ? await conn.query(query, parameters) : pool.query(query, parameters);
+}
+
+module.exports = {pool, doQuery};
