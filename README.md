@@ -1,27 +1,47 @@
-# DevOps-project
-## Social Media App
-Welcome to the Social Media App! This application is designed to allow users to connect with each other, share ideas, and collaborate on projects. This README file will provide you with information on how to install and use the application. We make easy developement and deployment of application using the different devops tools and deploy this website using docker containers where all the microservices architecture should be followed.
+# Aquarius Social Media App
+Simple social media app built with MySQL, Node.js, Express, React and Docker.
+***
 
-## Installation
-To install the Social Media App, please follow these steps:
-Clone the repository to your local machine.
-Navigate to the root directory of the project in your terminal.
-Run the command npm install to install the necessary dependencies.
-Run the command npm start to start the application.
+## Start the app with Docker
+Just execute this command in the root directory of the project:
 
-## Usage
-Once the application is running, you can access it in your web browser at http://localhost:3000.
+`docker-compose up`
 
-To use the Social Media App, you will need to create an account. You can sign up by providing your email address, username, and password.
+Docker will pull all images, create the containers and start all the services required to start the app.
+Wait until all the containers are up and the **database migration process is complete**, then you can access the app with the endpoints listed below.
 
-Once you are signed in, you can create posts, comment on other users' posts, and follow other users. You can also view your own profile page, where you can see all of your posts and followers.
+To manually migrate the database, first get inside the API container:
 
-## Contributing
-We welcome contributions to the Social Media App! If you would like to contribute, please follow these steps:
+`docker exec -it aquarius-api-dev sh`
 
-Fork the repository to your own GitHub account.
-Clone the forked repository to your local machine.
-Create a new branch for your changes.
-Make your changes to the code.
-Push your changes to your forked repository.
-Submit a pull request to the original repository.
+Then execute this command to start the migration process:
+
+`npm run migrate:up`
+
+If you want to read server logs:
+
+`docker logs -f aquarius-api-dev`
+
+Or replace `aquarius-api-dev` with any other container you want to read logs from.
+
+***
+
+## Endpoints
+|Service|Endpoint|
+|--------|---------------------|
+|MySQL|http://localhost:3306|
+|API|http://localhost:5000|
+|Frontend|http://localhost:3050|
+|Adminer|http://localhost:8080|
+
+## Users
+|Username|Email|Password|
+|--------|---------------|--------|
+|admin|admin@aquarius.com|admin|
+|user2|user2@aquarius.com|12345678|
+|user3|user3@aquarius.com|12345678|
+|user4|user4@aquarius.com|12345678|
+|user5|user5@aquarius.com|12345678|
+|user6|user6@aquarius.com|12345678|
+|user7|user7@aquarius.com|12345678|
+|user8|user8@aquarius.com|12345678|

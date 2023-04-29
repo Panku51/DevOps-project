@@ -1,0 +1,7 @@
+node_modules
+app/database/sql-scripts
+public/files/*
+!public/files/default-profile-image.jpg
+!public/files/default-header.jpg
+.env
+

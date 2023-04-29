@@ -1,0 +1,106 @@
+version: "3.7"
+
+services:
+  migration:
+    container_name: migration
+    build:
+      context: ./api
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=bMdX3B4GWTfzKTfm
+      - DB_PORT=3500
+      - DB_NAME=aquarius
+    command: ["bash", "./wait-for-it.sh", "mysql:3500", "--timeout=60", "--", "./app/database/migrations/migrate.sh"]
+    networks:
+      - internal_network
+
+  api:
+    container_name: aquarius-api-dev
+    build: ./api
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=bMdX3B4GWTfzKTfm
+      - DB_PORT=3500
+      - DB_NAME=aquarius
+      - DB_CONNECTION_LIMIT=10
+      - JWT_SECRET_KEY=xA0VkgSdrdSBKCSdhZuilI4DhvhTSQPs1Qyt7jODFmmrtQKNeerYgKwAQMCPegJHmOofdHFVVFuzwLQZxHgOKAluSCYZOcZjMYEYgWTPM0IuCtZA80bC8tsf+CXNmExWEtxHOvNkarvm5YjQlwwLa+IcMqWwiYrvdiOLFPXy4CBGInwfwZzI3ie6kift9yuXj2U9j6dZB/+bofGvwxeH1bVPlX9vkIQhE2nOmUDGEi/6ivqRZ1xn+uYpprr9YAZAwrGOZB0yg+k4m8vPLWfPWwHDbSmE/eWLK/HBVEbNHm4cGFRze3XnIMkpTizBoJXXfqoC10lwnzowDXN12ye0kg==
+      - JWT_EXPIRES_IN=3h
+      - PWD_SALT_ROUNDS=10
+      - PORT=5000
+      - NODE_ENV=development
+    volumes:
+      - '/api/node_modules'
+      - './api:/api'
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - mysql
+      - migration
+    networks:
+      - external_network
+      - internal_network
+      
+  mysql:
+    container_name: aquarius-mysql-dev
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=bMdX3B4GWTfzKTfm
+      - MYSQL_DATABASE=aquarius
+    volumes:
+      - './mysql/mysql_data:/var/lib/mysql'
+    ports:
+      - "127.0.0.1:3500:3500"
+    networks:
+      - internal_network
+  
+  adminer:
+    container_name: aquarius-adminer-dev
+    image: adminer:4.8.1-standalone
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=aquarius-mysql-dev
+    depends_on:
+      - mysql
+    networks:
+      - external_network
+      - internal_network
+
+  aquarius-frontend:
+    container_name: aquarius-frontend-dev
+    build: ./frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:3050
+      - REACT_APP_SECRET_KEY=xA0VkgSdrdSBKCSdhZuilI4DhvhTSQPs1Qyt7jODFmmrtQKNeerYgKwAQMCPegJHmOofdHFVVFuzwLQZxHgOKAluSCYZOcZjMYEYgWTPM0IuCtZA80bC8tsf+CXNmExWEtxHOvNkarvm5YjQlwwLa+IcMqWwiYrvdiOLFPXy4CBGInwfwZzI3ie6kift9yuXj2U9j6dZB/+bofGvwxeH1bVPlX9vkIQhE2nOmUDGEi/6ivqRZ1xn+uYpprr9YAZAwrGOZB0yg+k4m8vPLWfPWwHDbSmE/eWLK/HBVEbNHm4cGFRze3XnIMkpTizBoJXXfqoC10lwnzowDXN12ye0kg==
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - '/app/node_modules'
+      - './frontend:/app'
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - api
+    networks:
+      - internal_network
+
+  nginx:
+    container_name: aquarius-nginx-dev
+    depends_on:
+      - api
+      - aquarius-frontend
+    build: ./nginx
+    ports:
+      - "127.0.0.1:3050:80"
+    networks:
+      - external_network
+      - internal_network
+
+networks:
+  external_network:
+  internal_network:
+    driver: bridge
+  
