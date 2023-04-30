@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Start the Docker Compose stack
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh "sudo docker exec -u root -it 5b002d7b2c33 /bin/bash"
+                    
                     sh "sudo docker-compose build"
                     sh "sudo docker-compose up -d"
                 }
