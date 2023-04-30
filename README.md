@@ -1,5 +1,5 @@
 # SOCIAL_MEDIA_APP_DEVOPS_RPOJECT
-Simple social media app built with MySQL, Node.js, Express, React and Docker
+Simple social media app built with MySQL, Node.js, Express, React and Docker.
 ***
 
 ## Start the app with Docker
