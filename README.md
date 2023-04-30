@@ -1,4 +1,4 @@
-# Aquarius Social Media App
+# SOCIAL_MEDIA_APP_DEVOPS_RPOJECT
 Simple social media app built with MySQL, Node.js, Express, React and Docker.
 ***
 
