@@ -10,16 +10,49 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   <version>1.0</version>  
   <packaging>jar</packaging>  
   
-  <name>Maven Quick Start Archetype</name>  
-  <url>http://maven.apache.org</url>  
-  
-  <dependencies>  
-    <dependency>  
-      <groupId>junit</groupId>  
-      <artifactId>junit</artifactId>  
-      <version>4.8.2</version>  
-      <scope>test</scope>  
-    </dependency>  
-  </dependencies>  
-  
+  properties>
+    <node.version>v12.13.0</node.version>
+    <npm.version>6.12.0</npm.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Set up Node.js -->
+      <plugin>
+        <groupId>com.github.A-Garg123</groupId>
+        <artifactId>DevOps-project</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>  
