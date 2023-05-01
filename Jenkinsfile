@@ -1,18 +1,19 @@
+import com.cloudbees.plugins.dockerpipeline.DockerPipeline
+import com.cloudbees.plugins.dockerpipeline.DockerNodeDefinition
+
 def nodeLabel = 'docker-agent'
 def nodeImage = 'docker:20.10.8'
 
-// Create Jenkins node
-def dockerNode = dockerNodeProvider.createDockerNode(nodeLabel, nodeImage)
+def dockerNodeProvider = DockerPipeline.fromRegistry('docker').nodeProvider('docker')
 
+def dockerNode = dockerNodeProvider.createDockerNode(new DockerNodeDefinition(nodeLabel, nodeImage))
 
 pipeline {
-    agent {
-        label nodeLabel
-    }
+    agent { node { label nodeLabel } }
     stages {
         stage('Clone repository') {
             steps {
-                git 'https://github.com/A-Garg123/DevOps-project.git'
+                git 'https://github.com/myuser/myrepo.git'
             }
         }
         stage('Build and run containers') {
@@ -28,5 +29,4 @@ pipeline {
     }
 }
 
-// Cleanup Jenkins node after pipeline execution
-dockerNodeProvider.deleteDockerNode(dockerNode)
+dockerNodeProvider.deleteNode(dockerNode.getNodeName())
