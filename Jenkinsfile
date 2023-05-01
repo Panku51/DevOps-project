@@ -1,4 +1,6 @@
 import io.jenkins.docker.*
+import com.cloudbees.plugins.dockerpipeline.*
+
 import com.cloudbees.plugins.dockerpipeline.DockerPipeline
 import com.cloudbees.plugins.dockerpipeline.DockerNodeDefinition
 
