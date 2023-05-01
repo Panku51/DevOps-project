@@ -12,3 +12,16 @@ pipeline {
                       }
               }
           }
+         stage('Sonarqube Analysis - SAST') {
+         steps {
+               withSonarQubeEnv('SonarQube') {
+          sh "./gradlew sonar \
+                 -Dsonar.projectKey=test \
+                      -Dsonar.projectName='test' \
+                         -Dsonar.host.url=http://3.108.238.17:9000"
+               }
+           }
+        }
+     }
+    
+}
