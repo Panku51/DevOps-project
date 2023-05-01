@@ -29,8 +29,8 @@ pipeline {
          steps {
                withSonarQubeEnv('SonarQube') {
           sh "mvn clean verify sonar:sonar \
-                   -Dsonar.projectKey=devops_project \ 
-                       -Dsonar.projectName='devops_project' \ 
+                   -Dsonar.projectKey=devops_project_new \
+                      -Dsonar.projectName='devops_project_new' \
                           -Dsonar.host.url=http://3.108.238.17:9000"
                }
            }
