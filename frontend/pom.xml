@@ -43,12 +43,12 @@
             </configuration>
           </execution>
           <execution>
-            <id>npm run build</id>
+            <id>react-scripts build</id>
             <goals>
-              <goal>npm</goal>
+              <goal>react-scripts</goal>
             </goals>
             <configuration>
-              <arguments>run build</arguments>
+              <arguments>build</arguments>
             </configuration>
           </execution>
         </executions>
