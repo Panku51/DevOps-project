@@ -8,7 +8,7 @@ pipeline {
    stages {
       stage( 'Build Artifact') {
          steps {
-          sh "cd /DevOps-project/frontend && mvn clean package -DskipTests=true" 
+          sh "mvn clean package -DskipTests=true --file /DevOps-project/frontend/pom.xml" 
            archive 'target/*.jar'
           }
       }
