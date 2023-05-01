@@ -1,8 +1,10 @@
 plugins {
-    id "com.moowork.node" version "1.2.0"
+  id "org.sonarqube" version "4.0.0.2929"
+  id "com.moowork.node" version "1.2.0"
 }
  
 apply plugin: 'base'
+apply puging: "org.sonarqube"
 apply plugin: "com.moowork.node"
  
 node {
