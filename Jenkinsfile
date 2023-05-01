@@ -1,3 +1,4 @@
+import io.jenkins.docker.*
 
 
 def nodeLabel = 'docker-agent'
