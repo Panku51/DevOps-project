@@ -1,5 +1,6 @@
 import io.jenkins.docker.*
-
+import com.cloudbees.plugins.dockerpipeline.DockerPipeline
+import com.cloudbees.plugins.dockerpipeline.DockerNodeDefinition
 
 def nodeLabel = 'docker-agent'
 def nodeImage = 'docker:20.10.8'
