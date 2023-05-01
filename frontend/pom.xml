@@ -19,9 +19,9 @@
     <plugins>
       <!-- Set up Node.js -->
       <plugin>
-        <groupId>com.github.A-Garg123</groupId>
-        <artifactId>DevOps-project</artifactId>
-        <version>1.10.0</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
         <executions>
           <execution>
             <id>install node and npm</id>
