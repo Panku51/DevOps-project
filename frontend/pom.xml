@@ -19,8 +19,8 @@
     <plugins>
       <!-- Set up Node.js -->
       <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
+        <groupId>com.github.A-Garg123</groupId>
+        <artifactId>DevOps-project</artifactId>
         <version>1.10.0</version>
         <executions>
           <execution>
