@@ -38,7 +38,7 @@ pipeline {
        stage('Deploy') {
             steps {
                 // Start the Docker Compose stack
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) 
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: 'pankaj']])
                     sh "docker-compose build"
                     sh "docker-compose up -d"
                 }
