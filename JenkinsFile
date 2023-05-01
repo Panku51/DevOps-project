@@ -9,7 +9,6 @@ pipeline {
       stage( 'Build Artifact') {
          steps {
           sh "mvn -f frontend/ clean package -DskipTests=true" 
-          sh "mvn -f api/ clean package -DskipTests=true" 
            archive 'target/*.jar'
           }
       }
