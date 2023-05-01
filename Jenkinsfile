@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                git 'https://github.com/myuser/myrepo.git'
+                git 'https://github.com/A-Garg123/DevOps-project.git'
             }
         }
         stage('Build and run containers') {
