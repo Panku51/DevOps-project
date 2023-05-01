@@ -39,9 +39,9 @@ pipeline {
             steps {
                 // Start the Docker Compose stack
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    
-                    sh "sudo docker-compose build"
-                    sh "sudo docker-compose up -d"
+                    sh "sudo docker start 5b002d7b2c33"
+                    sh "docker-compose build"
+                    sh "docker-compose up -d"
                 }
             }
         }
